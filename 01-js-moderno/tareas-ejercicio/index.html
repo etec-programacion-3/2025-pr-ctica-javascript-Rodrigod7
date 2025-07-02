@@ -11,7 +11,40 @@
     <input type="text" id="task-input" placeholder="Nueva tarea" required />
     <button type="submit">Agregar</button>
   </form>
+  <form >
+    <button type="submit">Mostrar Completadas</button>
+
+  </form>
   <ul id="task-list"></ul>
   <script type="module" src="main.js"></script>
 </body>
+<script>
+  // Aquí puedes agregar código JavaScript adicional si es necesario
+</script>
+<script type="module">
+  import { addTask, removeTask } from './taskManager.js';
+
+  document.getElementById('task-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const taskInput = document.getElementById('task-input');
+    const taskText = taskInput.value.trim();
+    if (taskText) {
+      addTask(taskText);
+      taskInput.value = '';
+    }
+  });
+
+  document.getElementById('task-list').addEventListener('click', function(event) {
+    if (event.target.tagName === 'BUTTON') {
+      const taskItem = event.target.parentElement;
+      removeTask(taskItem);
+    }
+  });
+</script>
+<script type="module">
+  import { renderTasks } from './taskManager.js';
+
+  // Renderizar las tareas al cargar la página
+  renderTasks();
+</script>
 </html> 
